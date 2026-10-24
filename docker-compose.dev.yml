@@ -1,0 +1,12 @@
+services:
+  web:
+    volumes:
+      - ./addons:/mnt/extra-addons
+      - odoo-dev-web-data:/var/lib/odoo
+  db:
+    volumes:
+      - odoo-dev-db-data:/var/lib/postgresql/data
+
+volumes:
+  odoo-dev-web-data:
+  odoo-dev-db-data:

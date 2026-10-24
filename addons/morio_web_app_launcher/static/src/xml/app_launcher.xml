@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="morio_web_app_launcher.CompanyLogoInMessagingMenu"
+       t-inherit="mail.MessagingMenu"
+       t-inherit-mode="extension">
+        <xpath expr="//i[hasclass('fa-comments')]" position="replace">
+            <span class="morio_navbar_company_logo_frame"
+                  t-att-title="user.activeCompany and user.activeCompany.name"
+                  t-on-click="() => store.discuss.activeTab = ui.isSmall and store.discuss.activeTab === 'notification' ? 'notification' : store.discuss.activeTab">
+                <i class="fa fa-building morio_navbar_company_logo_fallback" aria-hidden="true"/>
+                <img t-if="user.activeCompany"
+                     class="morio_navbar_company_logo"
+                     t-att-src="`/web/image/res.company/${user.activeCompany.id}/logo`"
+                     t-att-alt="user.activeCompany.name"
+                     role="img"
+                     t-on-error="(ev) => ev.target.classList.add('morio_company_logo_broken')"/>
+            </span>
+        </xpath>
+    </t>
+
+    <t t-name="morio_web_app_launcher.NavBarHomeButton"
+       t-inherit="web.NavBar.AppsMenu"
+       t-inherit-mode="extension">
+        <xpath expr="//a[hasclass('o_menu_toggle')]" position="replace">
+            <button type="button"
+                    class="o_menu_toggle border-0 morio_navbar_home_button"
+                    title="Accueil"
+                    aria-label="Accueil"
+                    accesskey="h"
+                    t-on-click="() => this.actionService.doAction('morio_web_app_launcher.action_app_launcher_home')">
+                <i class="oi oi-apps" aria-hidden="true"/>
+            </button>
+        </xpath>
+        <xpath expr="//div[hasclass('o_navbar_apps_menu')]" position="replace">
+            <div t-if="!isScopedApp" class="o_navbar_apps_menu morio_navbar_home_link">
+                <button type="button"
+                        class="morio_navbar_home_button"
+                        title="Accueil"
+                        aria-label="Accueil"
+                        accesskey="h"
+                        t-on-click="() => this.actionService.doAction('morio_web_app_launcher.action_app_launcher_home')">
+                    <i class="oi oi-apps" aria-hidden="true"/>
+                </button>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-name="morio_web_app_launcher.Home">
+        <main class="morio_home_launcher"
+              t-att-style="'--morio-launcher-background: ' + state.backgroundColor">
+            <div class="morio_home_launcher_toolbar">
+                <button t-if="canManageSettings"
+                        type="button"
+                        class="morio_launcher_settings_button"
+                        title="Paramètres du lanceur"
+                        aria-label="Paramètres du lanceur"
+                        t-on-click="() => this.openSettings()">
+                    <i class="fa fa-cog" aria-hidden="true"/>
+                </button>
+            </div>
+            <ul t-if="apps.length" class="morio_home_launcher_grid" aria-label="Applications">
+                <li t-foreach="apps" t-as="app" t-key="app.id" class="morio_home_launcher_item">
+                    <a class="morio_home_launcher_card"
+                       t-att-href="getMenuItemHref(app)"
+                       t-att-title="app.name"
+                       t-att-aria-label="app.name"
+                       t-on-click="(ev) => this.onAppClick(ev, app)">
+                        <span class="morio_app_launcher_icon morio_home_launcher_icon" aria-hidden="true">
+                            <i class="oi oi-apps morio_app_launcher_fallback"/>
+                            <img t-if="app.webIconData"
+                                 class="morio_app_launcher_image"
+                                 t-att-src="app.webIconData"
+                                 alt=""
+                                 t-on-error="(ev) => ev.target.classList.add('morio_icon_broken')"/>
+                        </span>
+                        <span class="morio_home_launcher_label" t-esc="app.name"/>
+                    </a>
+                </li>
+            </ul>
+            <div t-else="" class="morio_home_launcher_empty" role="status">
+                Aucune application disponible.
+            </div>
+        </main>
+    </t>
+
+    <t t-name="morio_web_app_launcher.Settings">
+        <main class="morio_launcher_settings"
+              t-att-style="'--morio-launcher-background: ' + state.backgroundColor">
+            <section class="morio_launcher_settings_card">
+                <header class="morio_launcher_settings_header">
+                    <button type="button" class="morio_launcher_back_button" t-on-click="() => this.backToHome()">
+                        <i class="fa fa-arrow-left" aria-hidden="true"/>
+                        <span>Retour au menu</span>
+                    </button>
+                    <h1>Paramètres du lanceur</h1>
+                </header>
+                <t t-if="canManageSettings">
+                    <section class="morio_launcher_setting">
+                        <div class="morio_launcher_setting_copy">
+                            <label for="morio_launcher_background_color">Couleur de fond du menu</label>
+                            <p>Cette couleur sera utilisée par tous les utilisateurs.</p>
+                        </div>
+                        <div class="morio_launcher_color_control">
+                            <input id="morio_launcher_background_color"
+                                   type="color"
+                                   t-att-value="state.backgroundColor"
+                                   t-att-disabled="state.isLoading || state.isSaving"
+                                   t-on-input="(ev) => this.onColorChange(ev)"/>
+                            <span t-esc="state.backgroundColor"/>
+                        </div>
+                        <div class="morio_launcher_color_preview"
+                             t-att-style="'background-color: ' + state.backgroundColor"
+                             aria-label="Aperçu de la couleur choisie"/>
+                    </section>
+                    <div class="morio_launcher_settings_actions">
+                        <button type="button"
+                                class="btn btn-outline-secondary"
+                                t-att-disabled="state.isLoading || state.isSaving"
+                                t-on-click="() => this.resetColor()">
+                            Réinitialiser
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                t-att-disabled="state.isLoading || state.isSaving"
+                                t-on-click="() => this.saveColor()">
+                            <t t-if="state.isSaving">Enregistrement…</t>
+                            <t t-else="">Enregistrer</t>
+                        </button>
+                    </div>
+                </t>
+                <div t-else="" class="alert alert-warning" role="status">
+                    Seuls les administrateurs peuvent modifier les paramètres du lanceur.
+                </div>
+            </section>
+        </main>
+    </t>
+</templates>

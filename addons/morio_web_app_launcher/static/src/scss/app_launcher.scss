@@ -1,0 +1,345 @@
+.morio_app_launcher_tile_content {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.morio_navbar_company_logo_frame {
+    position: relative;
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 0.4rem;
+    background: #fff;
+    color: var(--o-brand-primary, #714b67);
+}
+
+.morio_navbar_company_logo_fallback {
+    grid-area: 1 / 1;
+    font-size: 1.1rem;
+}
+
+.morio_navbar_company_logo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0.15rem;
+    object-fit: contain;
+}
+
+.morio_company_logo_broken {
+    display: none;
+}
+
+.morio_app_launcher_icon {
+    position: relative;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 0.75rem;
+    background: var(--o-gray-100, #f1f1f1);
+    color: var(--o-gray-700, #495057);
+    font-size: 1.5rem;
+}
+
+.morio_app_launcher_image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    object-fit: contain;
+}
+
+.morio_icon_broken {
+    display: none;
+}
+
+.morio_app_launcher_label {
+    display: -webkit-box;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.morio_app_launcher_empty {
+    padding: 1rem;
+    color: var(--o-gray-600, #6c757d);
+}
+
+.morio_home_launcher {
+    box-sizing: border-box;
+    min-height: calc(100vh - var(--o-navbar-height, 3rem));
+    overflow-y: auto;
+    background: var(--morio-launcher-background, #f2f3f5);
+    padding: 1.75rem 2.5rem 3rem;
+}
+
+.morio_home_launcher_toolbar {
+    display: flex;
+    width: 100%;
+    max-width: 68rem;
+    justify-content: flex-end;
+    margin: 0 auto 1rem;
+}
+
+.morio_launcher_settings_button {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border: 1px solid rgba(73, 53, 68, 0.15);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0.15rem 0.45rem rgba(0, 0, 0, 0.12);
+    color: #493544;
+    font-size: 1.1rem;
+
+    &:hover,
+    &:focus-visible {
+        outline: 2px solid #714b67;
+        outline-offset: 2px;
+    }
+}
+
+.morio_navbar_home_button {
+    display: grid;
+    width: var(--o-navbar-height, 3rem);
+    height: 100%;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 1.15rem;
+
+    &:hover,
+    &:focus-visible {
+        background: rgba(255, 255, 255, 0.14);
+        outline: none;
+    }
+}
+
+body.morio_launcher_active {
+    .o_main_navbar {
+        --NavBar-entry-color: #fff;
+        --NavBar-brand-color: #fff;
+        --NavBar-entry-color--active: #fff;
+        --NavBar-entry-backgroundColor--hover: rgba(255, 255, 255, 0.12);
+        --NavBar-entry-backgroundColor--focus: rgba(255, 255, 255, 0.16);
+        --NavBar-entry-backgroundColor--active: rgba(255, 255, 255, 0.2);
+        background: #493544 !important;
+        border-bottom: 3px solid rgba(255, 255, 255, 0.68) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+        color: #fff;
+    }
+}
+
+body.morio_launcher_home {
+    .o_navbar_apps_menu,
+    .o_menu_toggle {
+        display: none !important;
+    }
+}
+
+.morio_home_launcher_grid {
+    display: grid;
+    width: 100%;
+    max-width: 68rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.25rem 0.75rem;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+
+.morio_home_launcher_item {
+    min-width: 0;
+}
+
+.morio_home_launcher_card {
+    display: flex;
+    min-width: 0;
+    min-height: 6.5rem;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--o-gray-900, #212529);
+    padding: 0.25rem;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+        color: var(--o-gray-900, #212529);
+        outline: 2px solid var(--o-brand-primary, #714b67);
+        outline-offset: 2px;
+        text-decoration: none;
+    }
+}
+
+.morio_home_launcher_icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-basis: 3.5rem;
+    border-radius: 0.3rem;
+    background: #fff;
+    box-shadow: 0 0.2rem 0.55rem rgba(0, 0, 0, 0.12);
+    font-size: 1.6rem;
+}
+
+.morio_home_launcher_label {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.25;
+}
+
+.morio_home_launcher_empty {
+    padding-top: 20vh;
+    color: var(--o-gray-600, #6c757d);
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .morio_home_launcher {
+        padding: 1.5rem 1rem;
+    }
+
+    .morio_home_launcher_toolbar {
+        margin-bottom: 0.5rem;
+    }
+
+    .morio_home_launcher_grid {
+        grid-template-columns: repeat(auto-fill, minmax(7.25rem, 1fr));
+        gap: 1rem;
+    }
+}
+
+.morio_launcher_settings {
+    box-sizing: border-box;
+    min-height: calc(100vh - var(--o-navbar-height, 3rem));
+    background: var(--morio-launcher-background, #f2f3f5);
+    padding: 2rem 1rem 3rem;
+}
+
+.morio_launcher_settings_card {
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
+    border-radius: 0.75rem;
+    background: #fff;
+    box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.morio_launcher_settings_header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+    h1 {
+        margin: 0;
+        color: #352532;
+        font-size: 1.5rem;
+    }
+}
+
+.morio_launcher_back_button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 0;
+    background: transparent;
+    color: #714b67;
+    padding: 0.5rem;
+
+    &:hover,
+    &:focus-visible {
+        text-decoration: underline;
+    }
+}
+
+.morio_launcher_setting {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid #e6e2e6;
+    padding: 1.5rem 0;
+}
+
+.morio_launcher_setting_copy {
+    label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+    }
+
+    p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+}
+
+.morio_launcher_color_control {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #495057;
+    font-family: monospace;
+    text-transform: uppercase;
+
+    input {
+        width: 3rem;
+        height: 2.5rem;
+        border: 1px solid #d3cdd3;
+        border-radius: 0.4rem;
+        background: transparent;
+        cursor: pointer;
+        padding: 0.15rem;
+    }
+}
+
+.morio_launcher_color_preview {
+    grid-column: 1 / -1;
+    height: 7rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0.5rem;
+}
+
+.morio_launcher_settings_actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    border-top: 1px solid #e6e2e6;
+    padding-top: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .morio_launcher_setting {
+        grid-template-columns: 1fr;
+    }
+
+    .morio_launcher_color_control {
+        justify-content: flex-start;
+    }
+
+    .morio_launcher_settings_card {
+        padding: 1.25rem;
+    }
+}
